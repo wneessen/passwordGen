@@ -5,14 +5,11 @@ use warnings;
 use strict;
 use v5.12;
 use Carp;
-use Encode;
 use Crypt::PRNG;
-use Data::Dumper;
 use Getopt::Long;
-use MIME::Base64;
 
 ## Global defaults
-my $VERSION                 = 1.02;
+my $VERSION                 = 1.03;
 my $DEFAULT_RAND_FUNC       = 'ChaCha20';
 my $DEFAULT_PASS_LENGTH     = 20;
 my $PW_LOWER_CHARS_HUMAN    = qq(abcdefghjkmnpqrstuvwxyz);
