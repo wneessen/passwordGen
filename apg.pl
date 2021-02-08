@@ -12,16 +12,17 @@ use Getopt::Long;
 use MIME::Base64;
 
 ## Global defaults
-my $DEFAULT_RAND_FUNC      = 'ChaCha20';
-my $DEFAULT_PASS_LENGTH    = 20;
-my $PW_LOWER_CHARS_HUMAN   = qq(abcdefghjkmnpqrstuvwxyz);
-my $PW_UPPER_CHARS_HUMAN   = qq(ABCDEFGHJKMNPQRSTUVWXYZ);
-my $PW_LOWER_CHARS         = qq(abcdefghijklmnopqrstuvwxyz);
-my $PW_UPPER_CHARS         = qq(ABCDEFGHIJKLMNOPQRSTUVWXYZ);
-my $PW_SPECIAL_CHARS_HUMAN = qq(#/!\$%&+-*);
-my $PW_SPECIAL_CHARS       = qq(#/!\$%&+-*.,"?=\(\)[]{}:;~^|);
-my $PW_NUMBERS_HUMAN       = qq(23456789);
-my $PW_NUMBERS             = qq(1234567890);
+my $VERSION                 = 1.02;
+my $DEFAULT_RAND_FUNC       = 'ChaCha20';
+my $DEFAULT_PASS_LENGTH     = 20;
+my $PW_LOWER_CHARS_HUMAN    = qq(abcdefghjkmnpqrstuvwxyz);
+my $PW_UPPER_CHARS_HUMAN    = qq(ABCDEFGHJKMNPQRSTUVWXYZ);
+my $PW_LOWER_CHARS          = qq(abcdefghijklmnopqrstuvwxyz);
+my $PW_UPPER_CHARS          = qq(ABCDEFGHIJKLMNOPQRSTUVWXYZ);
+my $PW_SPECIAL_CHARS_HUMAN  = qq(#/\\\$%&+-*);
+my $PW_SPECIAL_CHARS        = qq(#/!\$%&+-*.,"?=\(\)[]{}:;~^|);
+my $PW_NUMBERS_HUMAN        = qq(23456789);
+my $PW_NUMBERS              = qq(1234567890);
 
 ## Global variables
 my %config;
@@ -47,8 +48,11 @@ GetOptions(
     'numbers|N'         => \$config{useNumbers},
     'special|S'         => \$config{useSpecialChars},
     'human|H'           => \$config{humanReadable},
+    'exclude|E=s'       => \$config{excludeChars},
     'help|h'            => \$config{showHelp},
+    'version|v'         => \$config{showVersion},
 );
+_showVersion() if defined($config{showVersion});
 _showHelp() if defined($config{showHelp});
 _showHelp('Min. password length too small') if($config{minPassLength} && $config{minPassLength} < 1);
 _showHelp('Max. password length too small') if($config{maxPassLength} && $config{maxPassLength} < 1);
@@ -99,6 +103,9 @@ sub _genPass {
     $charRange .= (defined($config{useUpperCase}) && $config{useUpperCase} == 1) ? $pwUpperChars : '';
     $charRange .= (defined($config{useNumbers}) && $config{useNumbers} == 1) ? $pwNumbers : '';
     $charRange .= (defined($config{useSpecialChars}) && $config{useSpecialChars} == 1) ? $pwSpecialChars : '';
+    if(defined($config{excludeChars})) {
+        $charRange =~ s/[$config{excludeChars}]//g;
+    }
 
     return $pseudoRandNumGen->string_from($charRange, $pwLength);
 }
@@ -134,8 +141,8 @@ sub _showHelp {
         say STDERR 'Error: ' . $hasError;
         say '';
     }
-    say STDERR 'Advanced Password Generator';
-    say STDERR 'Usage: ' . $0 . ' <foo>';
+    say STDERR 'Advanced Password Generator v' . $VERSION;
+    say STDERR 'Usage: ' . $0 . ' <arguments>';
     say STDERR '';
     say STDERR '    -m, --minpasslen       Minimum password length';
     say STDERR '    -x, --maxpasslen       Maximum password length';
@@ -154,6 +161,17 @@ sub _showHelp {
     else {
         exit 0;
     }
+}
+
+## Show CLI version text // _showVersion() {{{
+##  Requires:   undef
+##  Optional:   undef
+##  onSuccess:  Prints version string
+##  onFailure:  undef
+sub _showVersion {
+
+    say STDERR 'Advanced Password Generator v' . $VERSION;
+    exit 0;
 }
 
 1;
