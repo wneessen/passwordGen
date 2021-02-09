@@ -6,8 +6,9 @@ This service requires some NodeJS and some modules to work:
 - [Perl 5.12 or higher](https://www.perl.org/)
 - [CryptX](https://metacpan.org/pod/CryptX) (in FreeBSD i. e. it's the p5-CryptX package)
 
-### Docker image
+## Docker image
 There is a [Docker image](https://hub.docker.com/r/wneessen/apg.pl) for apg.pl available on DockerHub.
+_Please keep in mind, that a Docker container might not provide enough entropy, to ensure truely random passwords_
 
 To run the Docker image simply issue the following command:
 - Download the docker image
