@@ -7,16 +7,15 @@ This service requires some NodeJS and some modules to work:
 - [CryptX](https://metacpan.org/pod/CryptX) (in FreeBSD i. e. it's the p5-CryptX package)
 
 ## Docker image
+_(Please keep in mind, that a Docker container might not provide sufficient entropy, to ensure truly random passwords)_
+
 There is a [Docker image](https://hub.docker.com/r/wneessen/apg.pl) for apg.pl available on DockerHub.
 
-_Please keep in mind, that a Docker container might not provide enough entropy, to ensure truely random passwords_
-
-To run the Docker image simply issue the following command:
-- Download the docker image
+To run apg.pl as Docker container simply issue the following command:
+- Download the Docker image
   ```sh
   $ sudo docker pull wneessen/apg.pl:latest 
   ```
-- Once downloaded, you are ready to go:
 - Once downloaded, you are ready to go. Just run the docker image with your CLI parameters of choice
   ```sh
   $ docker run wneessen/apg.pl:latest --help
