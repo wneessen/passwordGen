@@ -9,7 +9,7 @@ use Crypt::PRNG;
 use Getopt::Long;
 
 ## Global defaults
-my $VERSION                 = 1.03;
+my $VERSION                 = 1.04;
 my $DEFAULT_RAND_FUNC       = 'ChaCha20';
 my $DEFAULT_PASS_LENGTH     = 20;
 my $PW_LOWER_CHARS_HUMAN    = qq(abcdefghjkmnpqrstuvwxyz);
@@ -141,15 +141,17 @@ sub _showHelp {
     say STDERR 'Advanced Password Generator v' . $VERSION;
     say STDERR 'Usage: ' . $0 . ' <arguments>';
     say STDERR '';
-    say STDERR '    -m, --minpasslen       Minimum password length';
-    say STDERR '    -x, --maxpasslen       Maximum password length';
-    say STDERR '    -n, --numofpass        Number of passwords to generate';
-    say STDERR '    -C, --complex          Generate complex passwords (enables -U -N -S and disabled -H)';
-    say STDERR '    -U, --uppercase        Use uppercase characters in passwords';
-    say STDERR '    -N, --numbers          Use numbers in passwords';
-    say STDERR '    -S, --special          Use special characters in passwords';
-    say STDERR '    -H, --human            Avoid ambiguous characters (like l, 1 o, O, 0)';
-    say STDERR '    -h, --help             Show this help text';
+    say STDERR '    -m, --minpasslen <length>   Minimum password length';
+    say STDERR '    -x, --maxpasslen <length>   Maximum password length';
+    say STDERR '    -n, --numofpass <number>    Number of passwords to generate';
+    say STDERR '    -E, --exclude <chars>       Number of passwords to generate';
+    say STDERR '    -C, --complex               Generate complex passwords (enables -U -N -S and disabled -H)';
+    say STDERR '    -U, --uppercase             Use uppercase characters in passwords';
+    say STDERR '    -N, --numbers               Use numbers in passwords';
+    say STDERR '    -S, --special               Use special characters in passwords';
+    say STDERR '    -H, --human                 Avoid ambiguous characters (like l, 1 o, O, 0)';
+    say STDERR '    -h, --help                  Show this help text';
+    say STDERR '    -v, --version               Show version string';
     say STDERR '';
 
     if(defined($hasError)) {
