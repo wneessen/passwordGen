@@ -8,6 +8,7 @@ This service requires some NodeJS and some modules to work:
 
 ## Docker image
 There is a [Docker image](https://hub.docker.com/r/wneessen/apg.pl) for apg.pl available on DockerHub.
+
 _Please keep in mind, that a Docker container might not provide enough entropy, to ensure truely random passwords_
 
 To run the Docker image simply issue the following command:
