@@ -6,6 +6,20 @@ This service requires some NodeJS and some modules to work:
 - [Perl 5.12 or higher](https://www.perl.org/)
 - [CryptX](https://metacpan.org/pod/CryptX) (in FreeBSD i. e. it's the p5-CryptX package)
 
+### Docker image
+There is a [Docker image](https://hub.docker.com/r/wneessen/apg.pl) for apg.pl available on DockerHub.
+
+To run the Docker image simply issue the following command:
+- Download the docker image
+  ```sh
+  $ sudo docker pull wneessen/apg.pl:latest 
+  ```
+- Once downloaded, you are ready to go:
+- Once downloaded, you are ready to go. Just run the docker image with your CLI parameters of choice
+  ```sh
+  $ docker run wneessen/apg.pl:latest --help
+  ```
+
 ## Usage
 Simply add the execute-flag to the script and run it
 ```sh
