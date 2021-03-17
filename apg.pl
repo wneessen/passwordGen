@@ -114,7 +114,7 @@ sub _genPass {
 ##  onSuccess:  randObj
 ##  onFailure:  croak
 sub _getRandObj {
-    my ($self, $randFunc) = @_;
+    my $randFunc = shift;
     my $randObj = eval {
         Crypt::PRNG->new($randFunc || $DEFAULT_RAND_FUNC);
     };
